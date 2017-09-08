@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Entity.Alumno>
+
+@{
+    ViewBag.Title = "Listado de Alumnos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="page-header">
+    <a href="~/Home/Crud/" class="btn btn-default pull-right">Nuevo Alumno</a>
+</h2>
+
+<table id="grid" class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @(item.Sexo ==1 ? "Hombre" : "Mujer")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
+                    <a class="btn btn-xs btn-default" href="~/Home/Ver/@item.id">Visualizar</a>
+                    <a class="btn btn-xs btn-primary" href="~/Home/Crud/@item.id">Editar</a>
+                    <a onclick="return confirm('Esta Seguro de Eliminar este registro ?');
+            " class="btn btn-xs btn-danger" href="~/Home/Eliminar/@item.id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
